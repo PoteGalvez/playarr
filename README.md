@@ -1,24 +1,57 @@
-# playarr
- Web-based media analyzer and fixer for Plex Direct Play compatibility
+# 🎬 Playarr
 
+**Web-based media analyzer and fixer for direct play compatibility across Plex, Emby, and Jellyfin**
 
-🚧 Project Status
-This project is currently in active development.
-Features, structure, and documentation may change frequently. Use with caution until a stable release is published.
+---
 
+## 🚧 Project Status
 
-# Media Compatibility Scanner
+This project is currently in **active development**.  
+Features, structure, and documentation may change frequently.  
+Use with caution until a stable release is published.
 
-This Flask app scans a media directory for Plex Direct Play compatibility based on custom profiles. It also offers an optional fix process using ffmpeg for unsupported audio codecs.
+---
 
-## Features
-- Adaptive scan (recursive or flat)
-- Profile-based compatibility checking
-- Optional audio track fixing
-- Web dashboard UI
-- REST API access
+## 🛠️ Media Compatibility Scanner
 
-## Requirements
+Playarr is a Flask-based tool that scans your media library to evaluate direct play compatibility for media servers such as **Plex**, **Emby**, and **Jellyfin**, using customizable profile definitions.
+
+It can also attempt to fix unsupported audio tracks via `ffmpeg`.
+
+---
+
+## ✨ Features
+
+- 🔍 Adaptive scan (recursive or flat, based on content)
+- 🧩 Profile-based compatibility checks (supports Plex, Emby, Jellyfin)
+- 🎧 Optional audio re-encoding for unsupported formats
+- 🖥️ Interactive web dashboard
+- 🔗 REST API for integration or automation
+
+---
+
+## ⚙️ Requirements
+
 - Python 3.9+
 - Flask
-- ffmpeg (in the environment)
+- ffmpeg (installed and available in the system PATH)
+
+---
+
+## 📦 Installation & Setup
+
+*(To be added — development phase)*
+
+---
+
+## 📌 Notes
+
+Playarr is designed to simplify media compatibility management for home media servers.  
+It runs locally in a Docker or Python environment and is intended for technical users managing media libraries.
+
+---
+
+## 📄 License
+
+MIT License *(or another to be defined)*
+
