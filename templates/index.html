@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playarr - Media Scanner</title> <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="theme-toggle-container">
+        <button id="theme-toggle" title="Toggle Dark/Light Mode">🌙</button>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Playarr - Media Scanner</h1> </header>
+
+        <div id="controls">
+            <label for="directory">Directory:</label>
+            <input type="text" id="directory" value="/media" disabled title="Set via container volume mount">
+            <label for="profile">Client Profile:</label>
+            <select id="profile" title="Select client profile for compatibility check">
+                {% if profiles %}
+                    {% for p in profiles %} <option value="{{ p }}">{{ p }}</option> {% endfor %}
+                {% else %}
+                    <option value="" disabled selected>No profiles loaded</option>
+                {% endif %}
+            </select>
+            <button id="manage-profiles-button" title="Add, Edit, Clone, or Delete profiles">Manage Profiles</button>
+            <button id="scan-button" {% if not profiles %}disabled{% endif %} title="Start scanning the directory">Start Scan</button>
+            <button id="stop-button" class="danger-button" style="display: none;" title="Cancel the current scan/fix task">Stop Task</button>
+        </div>
+
+        <div id="profile-manager-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="modal-close-button" id="modal-close-button" title="Close">&times;</span>
+                <h2>Manage Profiles</h2>
+                <div id="profile-list-manager">
+                    <p>Loading profiles...</p>
+                </div>
+                <button id="add-new-profile-button" class="add-button">Add New Profile</button>
+
+                <div id="profile-editor-container" class="editor-container" style="display: none;">
+                    <h3 id="editor-heading">Edit Profile: <span id="editing-profile-name"></span></h3>
+                    <div id="new-profile-name-container" style="display: none; margin-bottom: 10px;">
+                         <label for="new-profile-name">New Profile Filename:</label>
+                         <input type="text" id="new-profile-name" placeholder="e.g., My_TV_Profile (no spaces/special chars)">
+                         <span style="margin-left: 5px;">.json</span>
+                    </div>
+                    <textarea id="profile-editor" rows="15" spellcheck="false" placeholder='{&#10;  "description": "New Profile",&#10;  "notes": "Add rules here",&#10;  "supported_containers": ["mkv", "mp4"],&#10;  "supported_video_codecs": ["h264", "hevc"],&#10;  "supported_audio_codecs": ["aac", "ac3"],&#10;  "max_h264_level": 41,&#10;  "unsupported_subtitle_formats": ["hdmv_pgs_subtitle", "dvd_subtitle"]&#10;}'></textarea>
+                    <div class="editor-buttons">
+                        <button id="save-profile-button" class="save-button">Save Profile</button>
+                        <button id="cancel-edit-button">Cancel Edit</button>
+                    </div>
+                    <div id="editor-status" class="editor-status"></div>
+                </div>
+            </div>
+        </div>
+        <div id="status">
+            <h2>Status</h2>
+            <div id="progress-container" style="display: none;">
+                 <div id="progress-bar-outer"><div id="progress-bar-inner"></div></div>
+                 <span id="progress-text">0%</span>
+            </div>
+            <pre id="status-message">Idle</pre>
+        </div>
+
+        <div id="results">
+            <h2>Results</h2>
+            <div id="results-summary" class="summary">Summary will appear here after scan completes.</div>
+            <div id="results-filter" class="filter-controls">
+                <span class="filter-label">Show:</span>
+                <label><input type="radio" name="result-filter" value="all" checked> All</label>
+                <label><input type="radio" name="result-filter" value="attention"> Needs Attention Only</label>
+            </div>
+            <div id="fix-controls" class="fix-controls">
+                <span class="fix-label">Fix Options:</span>
+                <label for="fix-audio-codec">Target Audio:</label>
+                <select id="fix-audio-codec"><option value="aac" selected>AAC</option><option value="ac3">AC3</option></select>
+                <label for="fix-audio-bitrate">Bitrate (Optional):</label>
+                <input type="text" id="fix-audio-bitrate" placeholder="e.g., 192k">
+                <label for="fix-output-suffix">Suffix:</label>
+                <input type="text" id="fix-output-suffix" value=".fixed" required>
+                <label for="fix-backup">Backup (.bak):</label>
+                <input type="checkbox" id="fix-backup" checked>
+                <button id="fix-button" class="save-button">Fix 'Needs Attention' Files</button>
+            </div>
+            <div class="table-wrapper">
+                <table id="results-table">
+                    <thead>
+                        <tr>
+                            <th>Filename</th> <th>Container</th> <th>Video</th> <th>Audio</th>
+                            <th>Subtitles</th> <th>Direct Play</th> <th>Reason / Issue</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div> <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

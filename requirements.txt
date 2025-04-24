@@ -1,0 +1,3 @@
+Flask>=2.0
+rich>=10.0 # For console output in utils.py
+# We might add Flask-RQ and redis later for better background tasks
