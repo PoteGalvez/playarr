@@ -1,3 +1,9 @@
+🚧 Project Status
+This project is currently in active development.
+Features, structure, and documentation may change frequently. Use with caution until a stable release is published.
+
+--------------------------------------------------------------------------------------
+
 # playarr
  Web-based media analyzer and fixer for Plex Direct Play compatibility
 
