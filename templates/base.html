@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Playarr{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="app-title">Playarr</h1>
+            <nav class="nav-bar">
+                <a href="{{ url_for('main.index') }}">Home</a>
+                <a href="{{ url_for('main.about') }}">About</a>
+                <a href="{{ url_for('main.faq') }}">FAQ</a>
+            </nav>
+            <div class="dropdown-container" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="Settings menu container" style="margin-left:auto;">
+                <button id="settings-dropdown-button" class="icon-button" title="Settings" aria-haspopup="true" aria-expanded="false" aria-label="Open settings menu">
+                    ⚙️
+                </button>
+                <div id="settings-dropdown-menu" class="dropdown-menu" role="menu" aria-labelledby="settings-dropdown-button" hidden>
+                    <div class="dropdown-section">
+                        <button class="dropdown-item" id="menu-settings" role="menuitem">
+                            <span class="dropdown-icon">⚙️</span> Settings
+                        </button>
+                        <button class="dropdown-item" id="menu-profiles" role="menuitem">
+                            <span class="dropdown-icon">👤</span> Profiles
+                        </button>
+                    </div>
+                    <hr class="dropdown-divider" />
+                    <div class="dropdown-section">
+                        <button class="dropdown-item" id="menu-logs" role="menuitem">
+                            <span class="dropdown-icon">📄</span> View Logs
+                        </button>
+                        <button class="dropdown-item" id="menu-help" role="menuitem">
+                            <span class="dropdown-icon">❓</span> Help
+                        </button>
+                        <button class="dropdown-item" id="menu-donate" role="menuitem">
+                            <span class="dropdown-icon">💖</span> Donate
+                        </button>
+                    </div>
+                    <hr class="dropdown-divider" />
+                    <div class="dropdown-section">
+                        <button class="dropdown-item" id="menu-restart" role="menuitem">
+                            <span class="dropdown-icon">🔄</span> Restart Tasks
+                        </button>
+                        <button class="dropdown-item" id="menu-stop" role="menuitem">
+                            <span class="dropdown-icon">⏹️</span> Stop Tasks
+                        </button>
+                    </div>
+                    <hr class="dropdown-divider" />
+                    <div class="dropdown-section">
+                        <button class="dropdown-item" id="menu-toggle-theme" role="menuitem">
+                            <span class="dropdown-icon" id="theme-icon">🌙</span> Toggle Light/Dark Mode
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        {% block content %}{% endblock %}
+    </div>
+    <script src="{{ url_for('static', filename='utils.js') }}"></script>
+    <script src="{{ url_for('static', filename='scan-task.js') }}"></script>
+    <script src="{{ url_for('static', filename='profile-manager.js') }}"></script>
+    <script src="{{ url_for('static', filename='ui-init.js') }}"></script>
+</body>
+</html>

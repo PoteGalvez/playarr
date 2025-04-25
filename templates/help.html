@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Help - Playarr</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="app-title">Help</h1>
+            <nav class="nav-bar">
+                <a href="{{ url_for('main.index') }}">Home</a>
+                <a href="{{ url_for('main.about') }}">About</a>
+                <a href="{{ url_for('main.faq') }}">FAQ</a>
+            </nav>
+        </header>
+        <main>
+            <h2>Help Page</h2>
+            <p>This is a placeholder for the Help page.</p>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

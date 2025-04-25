@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About - Playarr</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="app-title">Playarr - About</h1>
+            <nav class="nav-bar">
+                <a href="{{ url_for('main.index') }}">Home</a>
+                <a href="{{ url_for('main.about') }}" class="active">About</a>
+                <a href="{{ url_for('main.faq') }}">FAQ</a>
+            </nav>
+        </header>
+        <main>
+            <h2>About Playarr</h2>
+            <p>Playarr is a media compatibility scanning and fixing tool designed to help you ensure your media files are compatible with your preferred media clients such as Plex, Jellyfin, and Emby.</p>
+            <p>This tool scans your media directory, identifies files that need attention, and can transcode audio tracks to improve compatibility.</p>
+            <p>For more information, visit the FAQ page.</p>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

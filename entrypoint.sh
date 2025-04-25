@@ -11,13 +11,16 @@ echo "Using UID: ${USER_ID}, GID: ${GROUP_ID}"
 # --- Configuration Directory Setup ---
 CONFIG_DIR="/config"
 PROFILES_DIR="${CONFIG_DIR}/profiles"
+LOGS_DIR="${CONFIG_DIR}/logs"
 DEFAULT_PROFILES_SRC="/app/default_profiles" # Temp location inside image
 
-# Create config/profiles directories if they don't exist within the volume
+# Create config, profiles, and logs directories if they don't exist within the volume
 mkdir -p "${PROFILES_DIR}"
-echo "Setting ownership for ${CONFIG_DIR} and ${PROFILES_DIR}..."
-chown "${USER_ID}:${GROUP_ID}" "${CONFIG_DIR}" || echo "Warning: Could not chown ${CONFIG_DIR}"
-chown "${USER_ID}:${GROUP_ID}" "${PROFILES_DIR}" || echo "Warning: Could not chown ${PROFILES_DIR}"
+mkdir -p "${LOGS_DIR}"
+echo "Setting ownership for ${CONFIG_DIR}, ${PROFILES_DIR}, and ${LOGS_DIR}..."
+chown -R "${USER_ID}:${GROUP_ID}" "${CONFIG_DIR}" || echo "Warning: Could not chown ${CONFIG_DIR}"
+chown -R "${USER_ID}:${GROUP_ID}" "${PROFILES_DIR}" || echo "Warning: Could not chown ${PROFILES_DIR}"
+chown -R "${USER_ID}:${GROUP_ID}" "${LOGS_DIR}" || echo "Warning: Could not chown ${LOGS_DIR}"
 
 # --- Copy Default Profiles (if target is empty) ---
 if [ -z "$(ls -A "${PROFILES_DIR}" 2>/dev/null)" ] || [ ! "$(find "${PROFILES_DIR}" -maxdepth 1 -name '*.json' -print -quit)" ]; then
@@ -25,7 +28,7 @@ if [ -z "$(ls -A "${PROFILES_DIR}" 2>/dev/null)" ] || [ ! "$(find "${PROFILES_DI
     cp -n "${DEFAULT_PROFILES_SRC}/"*.json "${PROFILES_DIR}/"
     echo "Default profiles copied."
     echo "Setting ownership for copied profiles..."
-    chown "${USER_ID}:${GROUP_ID}" "${PROFILES_DIR}"/*.json || echo "Warning: Could not chown copied profiles."
+    chown -R "${USER_ID}:${GROUP_ID}" "${PROFILES_DIR}"/*.json || echo "Warning: Could not chown copied profiles."
 else
     echo "Profiles directory '${PROFILES_DIR}' already contains files. Skipping default copy."
 fi
